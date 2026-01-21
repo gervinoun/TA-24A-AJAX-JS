@@ -3,8 +3,10 @@
 </script>
 
 <template>
+    <div class="container">
     <h1>{{ message }}</h1>
-    <button class="button">Click me!</button>
+    <button class="button is-primary">Click me!</button>
+    </div>
 </template>
 
 <style>
