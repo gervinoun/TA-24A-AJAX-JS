@@ -4,6 +4,7 @@
 
 <template>
     <h1>{{ message }}</h1>
+    <button class="button">Click me!</button>
 </template>
 
 <style>
