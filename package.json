@@ -6,7 +6,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@vitejs/plugin-vue": "^6.0.3",
-    "sass-embedded": "^1.97.2"
+    "sass-embedded": "^1.97.3"
   },
   "peerDependencies": {
     "typescript": "^5"
