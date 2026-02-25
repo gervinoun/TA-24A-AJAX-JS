@@ -1,1 +1,4 @@
-@use "bulma/sass" with ($primary: rgb(226, 228, 143));
+@use "bulma/sass" with 
+(
+    $primary: rgb(255, 0, 0)
+);
