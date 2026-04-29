@@ -8,13 +8,14 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "sass-embedded": "^1.97.3"
+    "sass-embedded": "^1.98.0"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^6.0.3",
+    "axios": "^1.14.0",
     "boxen": "^8.0.1",
     "bulma": "^1.0.4",
     "sass": "^1.97.3",

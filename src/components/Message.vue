@@ -1,6 +1,5 @@
 <script setup>
-
-let props = defineProps({
+const props = defineProps({
   title: {
     type: String,
   },
@@ -20,35 +19,24 @@ let props = defineProps({
   },
   size: {
     type: String,
+    default: 'large',
     validator(value) {
-      return [
-        'small',
-        'medium',
-        'large'
-      ].includes(value)
-    },
-    default: 'large'
+      return ['small', 'medium', 'large'].includes(value)
+    }
   }
-})
-let classes = {};
-if(props.color) {
-    classes += 'is-'+props.color
-
-}
-
-classes += 'is-'+props.size
+});
 </script>
 
 <template>
-  <article class="messages" :class="classes"
+  <article
+    class="message"
     :class="[
-      'message',
-      color ? `is-${color}` : '',
-      size ? `is-${size}` : ''
+      props.color ? `is-${props.color}` : '',
+      props.size ? `is-${props.size}` : ''
     ]"
   >
-    <div v-if="title" class="message-header">
-      <p>{{ title }}</p>
+    <div v-if="props.title" class="message-header">
+      <p>{{ props.title }}</p>
       <button class="delete" aria-label="delete"></button>
     </div>
 
