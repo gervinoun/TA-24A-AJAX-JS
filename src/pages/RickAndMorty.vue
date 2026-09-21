@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import CharacterCard from "../components/CharacterCard.vue";
+import AppButton from "../components/AppButton.vue";
 
 const characters = ref([]);
 const pagination = ref({
@@ -46,21 +47,23 @@ onMounted(() => {
 <template>
   <div class="container mt-4">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-      <button
-        class="pagination-previous"
+      <AppButton
+        buttonClass="pagination-previous"
         :disabled="!pagination.prev"
         @click="prev"
       >
         Previous
+      </AppButton>
+        Previous
       </button>
 
-      <button
-        class="pagination-next"
+      <AppButton
+        buttonClass="pagination-next"
         :disabled="!pagination.next"
         @click="next"
       >
         Next page
-      </button>
+      </AppButton>
 
       <ul class="pagination-list">
         <li>
