@@ -45,9 +45,7 @@ async function prev() {
 }
 
 async function goToPage(page) {
-  await getCharacters(
-    `https://rickandmortyapi.com/api/character?page=${page}`
-  );
+  await getCharacters(buildUrl(page));
 }
 
 function buildUrl(page = 1) {
@@ -79,7 +77,7 @@ async function applyFilters() {
 }
 
 onMounted(() => {
-  getCharacters("https://rickandmortyapi.com/api/character?page=1");
+  getCharacters(buildUrl(1));
 });
 </script>
 
