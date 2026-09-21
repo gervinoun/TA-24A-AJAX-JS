@@ -50,8 +50,32 @@ async function goToPage(page) {
   );
 }
 
-function applyFilters() {
-  console.log(filters.value);
+function buildUrl(page = 1) {
+  const params = new URLSearchParams();
+
+  params.append("page", page);
+
+  if (filters.value.name) {
+    params.append("name", filters.value.name);
+  }
+
+  if (filters.value.status) {
+    params.append("status", filters.value.status);
+  }
+
+  if (filters.value.species) {
+    params.append("species", filters.value.species);
+  }
+
+  if (filters.value.gender) {
+    params.append("gender", filters.value.gender);
+  }
+
+  return `https://rickandmortyapi.com/api/character?${params.toString()}`;
+}
+
+async function applyFilters() {
+  await getCharacters(buildUrl(1));
 }
 
 onMounted(() => {
