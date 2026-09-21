@@ -4,13 +4,22 @@ import CharacterCard from "../components/CharacterCard.vue";
 import AppButton from "../components/AppButton.vue";
 
 const characters = ref([]);
+
 const pagination = ref({
   count: 0,
   pages: 0,
   next: null,
   prev: null,
 });
+
 const currentPage = ref(1);
+
+const filters = ref({
+  name: "",
+  status: "",
+  species: "",
+  gender: "",
+});
 
 async function getCharacters(url) {
   const res = await fetch(url);
@@ -36,7 +45,13 @@ async function prev() {
 }
 
 async function goToPage(page) {
-  await getCharacters(`https://rickandmortyapi.com/api/character?page=${page}`);
+  await getCharacters(
+    `https://rickandmortyapi.com/api/character?page=${page}`
+  );
+}
+
+function applyFilters() {
+  console.log(filters.value);
 }
 
 onMounted(() => {
@@ -46,7 +61,61 @@ onMounted(() => {
 
 <template>
   <div class="container mt-4">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+
+    <div class="columns">
+      <div class="column">
+        <input
+          v-model="filters.name"
+          class="input"
+          type="text"
+          placeholder="Character name"
+        />
+      </div>
+
+      <div class="column">
+        <div class="select is-fullwidth">
+          <select v-model="filters.status">
+            <option value="">All statuses</option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="column">
+        <input
+          v-model="filters.species"
+          class="input"
+          type="text"
+          placeholder="Species"
+        />
+      </div>
+
+      <div class="column">
+        <div class="select is-fullwidth">
+          <select v-model="filters.gender">
+            <option value="">All genders</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="genderless">Genderless</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <AppButton @click="applyFilters">
+        Apply filters
+      </AppButton>
+    </div>
+
+    <nav
+      class="pagination is-centered"
+      role="navigation"
+      aria-label="pagination"
+    >
       <AppButton
         buttonClass="pagination-previous"
         :disabled="!pagination.prev"
@@ -54,8 +123,6 @@ onMounted(() => {
       >
         Previous
       </AppButton>
-        Previous
-      </button>
 
       <AppButton
         buttonClass="pagination-next"
@@ -67,7 +134,9 @@ onMounted(() => {
 
       <ul class="pagination-list">
         <li>
-          <button class="pagination-link" @click="goToPage(1)">1</button>
+          <button class="pagination-link" @click="goToPage(1)">
+            1
+          </button>
         </li>
 
         <li>
@@ -75,7 +144,10 @@ onMounted(() => {
         </li>
 
         <li v-if="currentPage > 1">
-          <button class="pagination-link" @click="goToPage(currentPage - 1)">
+          <button
+            class="pagination-link"
+            @click="goToPage(currentPage - 1)"
+          >
             {{ currentPage - 1 }}
           </button>
         </li>
@@ -87,7 +159,10 @@ onMounted(() => {
         </li>
 
         <li v-if="currentPage < pagination.pages">
-          <button class="pagination-link" @click="goToPage(currentPage + 1)">
+          <button
+            class="pagination-link"
+            @click="goToPage(currentPage + 1)"
+          >
             {{ currentPage + 1 }}
           </button>
         </li>
@@ -97,7 +172,10 @@ onMounted(() => {
         </li>
 
         <li>
-          <button class="pagination-link" @click="goToPage(pagination.pages)">
+          <button
+            class="pagination-link"
+            @click="goToPage(pagination.pages)"
+          >
             {{ pagination.pages }}
           </button>
         </li>
